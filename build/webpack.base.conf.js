@@ -24,9 +24,12 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
+    // 配置地址常量
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'common':resolve('src/components/common'),
+      'component':resolve('src/component')
     }
   },
   module: {
