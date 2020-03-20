@@ -32,18 +32,23 @@ export default {
   },
   methods: {
     login () {
-      this.$axios
-        .post('/api/login', {
-          username: this.loginInfoVo.username,
-          password: this.loginInfoVo.password
-        })
-        .then(successResponse => {
-          this.responseResult = JSON.stringify(successResponse.data)
-          if (successResponse.data.code === 200) {
-            this.$router.replace({path: '/index'})
-          }
-        })
-        .catch(failResponse => {})
+      if (this.loginInfoVo.username == "" || this.loginInfoVo.password == "") {
+        alert("请输入用户名或密码");
+        return
+      } else {
+        this.$http
+          .post('login', {
+            username: this.loginInfoVo.username,
+            password: this.loginInfoVo.password
+          })
+          .then(successResponse => {
+            this.responseResult = JSON.stringify(successResponse.data)
+            if (successResponse.data.code === 200) {
+              this.$router.replace({path: '/index'})
+            }
+          })
+          .catch(failResponse => {})
+      }
     }
   }
 }

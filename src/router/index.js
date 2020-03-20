@@ -8,11 +8,11 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'HelloWorld',
-    //   component: HelloWorld
-    // },
+    {
+      path: '/hello',
+      name: 'HelloWorld',
+      component: HelloWorld
+    },
     {
       path: '/',
       redirect: '/login'
@@ -30,6 +30,11 @@ export default new Router({
       path: '/login',
       name: 'BlogLogin',
       component: BlogLogin
+    },
+    {
+      path: '/123',
+      name: 'hellow',
+      component: HelloWorld
     }
   ]
 })

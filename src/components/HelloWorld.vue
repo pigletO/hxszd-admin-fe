@@ -80,18 +80,72 @@
         </a>
       </li>
     </ul>
+    <p>{{queryId}}</p>
+    <input type="text" v-model="queryId" v-bind:querId="queryId" placeholder="查询id"/>
+    <button @click="getTLine(queryId)" >查询</button>
+    <button @click="getTLineAll()" >查询全部</button>
+  <div id="app">{{lineInfo}}</div>
+  <p v-bind="lineInfoList" v-for="line in lineInfoList">{{line}}</p>
+    <!-- <ol>
+      <li v-bind="lineInfoList" v-for="line in lineInfoList">
+       {{ line }}
+      </li>
+    </ol> -->
+  <div>
+    <span v-bind:title="nowTime">提示信息</span>
   </div>
+
+  <div>
+    <span>{{longString}}</span>
+    <button @click="stringReverse()">字符反转</button>
+  </div>
+  <test-component></test-component>
+  </div>
+  <!-- <Test-component></Test-component> -->
+  
 </template>
 
+
 <script>
+import TestComponent from '@/components/TestCompent.vue'
+
 export default {
   name: 'HelloWorld',
+  components : {TestComponent},
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      code : 200,
+      message : "信息123",
+      lineInfo :"",
+      lineInfoList : [],
+      nowTime : "2020年3月19日18:20:01",
+      queryId : '',
+      longString : "abcd efg hijk"
+    }
+  },methods :{
+    getTLine : function(queryId){
+      this.$http.get("/get/" + queryId)
+      .then(Response => {
+        this.code = Response.data.code,
+        this.message = Response.data.message,
+        this.lineInfo = JSON.stringify(Response.data.data)
+      })},
+    getTLineAll : function(){
+      this.$http.get("/getAll")
+      .then(Response => {
+        this.code = Response.data.code,
+        this.message = Response.data.message,
+        this.lineInfoList = JSON.stringify(Response.data.data)
+      })},
+    stringReverse : function(){
+      console.log("1111")
+      this.longString = this.longString.split("").reverse().join("")
     }
   }
 }
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
