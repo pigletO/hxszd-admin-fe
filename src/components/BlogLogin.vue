@@ -44,6 +44,8 @@ export default {
           console.log(JSON.stringify(res.data.msg));
           this.verifyCodeImg = res.data.data.checkCode
         }
+      }).catch({
+        
       })
 
     },
