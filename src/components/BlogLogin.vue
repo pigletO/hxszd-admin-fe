@@ -7,8 +7,9 @@
       <br/>
       密码：<input type="password" v-model="loginInfoVo.password" placeholder="请输入密码" />
       <br/>
+      <img class="check_code_img" :src="verifyCodeImg" @click="getVerifyCode()">
       <button v-on:click="login">登录</button>
-      <br/>
+      <br/> 
       登录验证情况：<textarea cols="30" rows="10" v-model="responseResult"></textarea>
     </div>
     <hr/>
@@ -27,10 +28,25 @@ export default {
   data () {
     return {
       loginInfoVo: { username: '', password: '' },
-      responseResult: []
+      responseResult: [],
+      //verifyCodeImg : 'http://localhost:8099/hxszd/getVerifyCode'
+      verifyCodeImg : ''
     }
   },
   methods: {
+    getVerifyCode(){
+      this.$http.get("getVerifyCode",{
+        params:{}
+      }).then(res =>{
+        console.log(JSON.stringify(res.code));
+        //this.verifyCodeImg = res.data.data.checkCode
+        if(res.status == 200){
+          console.log(JSON.stringify(res.data.msg));
+          this.verifyCodeImg = res.data.data.checkCode
+        }
+      })
+
+    },
     login () {
       if (this.loginInfoVo.username == "" || this.loginInfoVo.password == "") {
         alert("请输入用户名或密码");
@@ -44,12 +60,16 @@ export default {
           .then(successResponse => {
             this.responseResult = JSON.stringify(successResponse.data)
             if (successResponse.data.code === 200) {
+              window.sessionStorage.setItem("token", "123456")
               this.$router.replace({path: '/index'})
             }
           })
           .catch(failResponse => {})
       }
     }
+  },
+  created(){
+    this.getVerifyCode()
   }
 }
 </script>

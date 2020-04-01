@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import BlogLogin from '@/components/BlogLogin.vue'
 import BlogIndex from '@/components/BlogIndex.vue'
+import WebSocketTest from '@/components/WebSocketTest.vue'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/123',
       name: 'hellow',
       component: HelloWorld
+    },
+    {
+      path: '/socket',
+      name: 'WebSocketTest',
+      component: WebSocketTest
     }
   ]
 })

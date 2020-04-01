@@ -22,6 +22,20 @@ import blogLogin from '@/components/BlogLogin.vue'
 export default {
   name: 'BlogIndex',
   // blogHeader/blogFooter组件给申明到components里面然后在template里面使用
-  components: { blogHeader, blogFooter }
+  components: { blogHeader, blogFooter },
+  data(){
+    return {
+
+    }
+  },
+  methods : {
+    getCheckCode(){
+
+    }
+
+  },
+  created(){
+
+  }
 }
 </script>
