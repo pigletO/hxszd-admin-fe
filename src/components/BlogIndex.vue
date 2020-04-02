@@ -16,7 +16,7 @@
 <script>
 import blogHeader from '@/components/common/BlogHeader.vue'
 import blogFooter from '@/components/common/BlogFooter.vue'
-import blogLogin from '@/components/BlogLogin.vue'
+import blogLogin from '@/views/BlogLogin.vue'
 
 
 export default {
